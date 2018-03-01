@@ -12,13 +12,14 @@ int main( int argc , char **argv )
     {
         int size = 0;
         double *ecgArray = helpers::getECG( argv[1] , size );
+	
+	ecg::ECGArray ecg = {ecgArray,size};
+	ecg::Statistics stats = ecg::analyzeECG (ecg);
+ 
 
-        double average = 0, standardDev = 0, max = 0 , min = 0;
-        ecg::analyzeECG( &ecgArray[0] , size ,average , standardDev , max , min );
-
-        std::cout <<"ECG average : " << average << std::endl
-                 << "ECG variance: " << standardDev << std::endl
-                 << "ECG range   : (" << min << "," << max << ")" << std::endl;
+        std::cout <<"ECG average : " << stats.mean << std::endl
+                 << "ECG variance: " << stats.variance << std::endl
+                 << "ECG range   : (" << stats.min << "," << stats.max << ")" << std::endl;
 
         delete [] ecgArray;
         return 0;

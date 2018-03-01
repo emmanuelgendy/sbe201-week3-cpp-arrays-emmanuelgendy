@@ -43,6 +43,18 @@ double square (double a)
 {
 	return a*a;
 }
+struct Triangle
+{
+	double a;
+	double b;
+	double c;
+};
+double heron (Triangle t)
+{
+	double s=0;
+	s=(t.a+t.b+t.c)/2;
+	return std::sqrt(s*(s-t.a)*(s-t.b)*(s-t.c));
+}
 }
 
 #endif // MATHEMATICS_HPP
